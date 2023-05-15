@@ -9,11 +9,19 @@ let botaoGerarSenha = document.querySelector(".botao__gerar");
 let botaoCopiarSenha = document.querySelector(".botao__copiar");
 let listaBoxes = [boxMaiuscula, boxMinuscula, boxNumeros, boxSimbolos];
 
-inputSlider.oninput = atualizaValor;
-inputSlider.oninput = geraSenha;
-botaoGerarSenha.onclick = geraSenha;
+inputSlider.onload = atualizaValor();
+inputSlider.oninput = function () {
+  atualizaValor();
+  geraSenha();
+};
+
 botaoCopiarSenha.onclick = copiar;
-boxMaiuscula.addEventListener("change", verificaDesmarcacao);
+botaoGerarSenha.onclick = geraSenha;
+
+for (let i = 0; i < listaBoxes.length; i++) {
+  listaBoxes[i].addEventListener("change", verificaDesmarcacao);
+  listaBoxes[i].addEventListener("change", geraSenha);
+}
 
 function copiar() {
   inputSenha.select();
@@ -42,7 +50,7 @@ function verificaMarcados(event) {
 }
 
 function atualizaValor() {
-  let valorAtual = inputSlider.value;
+  const valorAtual = inputSlider.value;
   valorSlider.textContent = valorAtual;
 }
 
@@ -75,7 +83,8 @@ function geraSenha() {
     let elemento = Math.floor(Math.random() * limiteElemento);
     senhaGerada.push(listaParaGerar[lista][elemento]);
     resultado = senhaGerada.join("");
-    console.log(lista, elemento);
   }
   inputSenha.value = resultado;
 }
+
+inputSenha.innerHTML = geraSenha();
