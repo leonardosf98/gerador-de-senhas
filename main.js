@@ -7,10 +7,39 @@ let boxMinuscula = document.querySelector(".box__minuscula");
 let boxSimbolos = document.querySelector(".box__simbolos");
 let botaoGerarSenha = document.querySelector(".botao__gerar");
 let botaoCopiarSenha = document.querySelector(".botao__copiar");
+let listaBoxes = [boxMaiuscula, boxMinuscula, boxNumeros, boxSimbolos];
 
 inputSlider.oninput = atualizaValor;
-inputSenha.oninput = geraSenha;
+inputSlider.oninput = geraSenha;
 botaoGerarSenha.onclick = geraSenha;
+botaoCopiarSenha.onclick = copiar;
+boxMaiuscula.addEventListener("change", verificaDesmarcacao);
+
+function copiar() {
+  inputSenha.select();
+  inputSenha.setSelectionRange(0, inputSenha.value.length);
+  navigator.clipboard.writeText(inputSenha.value);
+}
+
+function verificaDesmarcacao(event) {
+  if (!boxMaiuscula.checked) {
+    verificaMarcados(event.target);
+  }
+}
+
+function verificaMarcados(event) {
+  let listaBoxes = [boxMaiuscula, boxMinuscula, boxNumeros, boxSimbolos];
+  let totalMarcados = 1;
+
+  for (let i = 0; i < listaBoxes.length; i++) {
+    if (listaBoxes[i].checked === true) {
+      totalMarcados++;
+    }
+  }
+  if (totalMarcados === 1) {
+    event.checked = true;
+  }
+}
 
 function atualizaValor() {
   let valorAtual = inputSlider.value;
@@ -19,7 +48,7 @@ function atualizaValor() {
 
 function geraSenha() {
   let listaNumeros = "1234567890";
-  let listaSimbolos = "!@#$%^&*()_+-={[}]|:;'<>,.?/";
+  let listaSimbolos = "!@*%$#&^";
   let listaMaiuscula = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   let listaMinuscula = "abcdefghijklmnopqrstuvwxyz";
   let listaParaGerar = [];
@@ -48,6 +77,5 @@ function geraSenha() {
     resultado = senhaGerada.join("");
     console.log(lista, elemento);
   }
-
   inputSenha.value = resultado;
 }
