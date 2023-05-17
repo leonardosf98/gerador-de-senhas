@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de senhas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1 class="titulo">Gerador de senhas LS</h1>
+    <h2 class="apresentacao">Cansado de ter que pensar nas senhas em um cadastro? Gere a sua senha gratuitamente com
+        nosso site!</h2>
+    <input type="text" class="input__senha" placeholder="Arraste a bolinha ou clique no botão para gerar uma senha">
+    <button class="botao__copiar"> Logo Copiar</button>
+    <button class="botao__gerar"> Logo Gerar outra senha</button>
+    <div class="slider__container">
+        <p class="valor__slider">15</p>
+        <p class="valor__esquerda">1</p>
+        <input type="range" min="1" max="50" steps="1" class="input__range" value="15">
+        <p class="valor__direita">50</p>
+    </div>
+    <input type="checkbox" class="box__maiuscula" checked> Letra maiúscula
+    <input type="checkbox" class="box__minuscula"> Letra minúscula
+    <input type="checkbox" class="box__numeros" checked> Números
+    <input type="checkbox" class="box__simbolos" checked> Símbolos
+</body>
+<script src="main.js"></script>
+
+</html>
